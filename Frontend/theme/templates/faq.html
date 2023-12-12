@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}Часто Задаваемые Вопросы{% endblock %}
+
+{% block content %}
+<!-- Боковое меню -->
+
+ <div class="flex min-h-screen">
+
+        <!-- Боковое меню -->
+        <div class="bg-white shadow-lg w-64 p-6 flex flex-col">
+            <div class="mb-4 text-center">
+                <h2 class="text-lg font-semibold">Меню</h2>
+            </div>
+            <nav class="flex flex-col items-center flex-1">
+                <button onclick="showContent('tutorial')" class="text-blue-500 hover:text-blue-700 mb-2 w-full text-center">Туториал</button>
+                <button onclick="showContent('privacy')" class="text-blue-500 hover:text-blue-700 mb-2 w-full text-center">Политика конфиденциальности</button>
+                <button onclick="showContent('cookie')" class="text-blue-500 hover:text-blue-700 mb-2 w-full text-center">Политика использования Cookie</button>
+                <button onclick="showContent('faq')" class="text-blue-500 hover:text-blue-700 mb-2 w-full text-center">Часто задаваемые вопросы</button>
+            </nav>
+        </div>
+
+        <!-- Основной контент -->
+        <div class="flex-1 p-8 overflow-auto">
+            <div id="tutorial" class="content-section hidden">
+                <h2>Туториал</h2>
+                <p>Здесь будет информация по туториалу...</p>
+            </div>
+            <div id="privacy" class="content-section hidden">
+                <h2>Политика конфиденциальности</h2>
+                <p>Здесь будет политика конфиденциальности...</p>
+            </div>
+            <div id="cookie" class="content-section hidden">
+                <h2>Политика использования Cookie</h2>
+                <p>Здесь будет информация о политике использования Cookie...</p>
+            </div>
+            <div id="faq" class="content-section hidden">
+                <h2 class="text-center text-2xl font-bold mb-4">Часто задаваемые вопросы</h2>
+        <div class="space-y-4">
+            <!-- Вопрос 1 -->
+            <div>
+                <button onclick="toggleAnswer('answer1')" class="text-lg text-blue-500 hover:text-blue-700">
+                    Вопрос 1
+                </button>
+                <div id="answer1" class="hidden mt-2 p-4 border rounded-lg bg-blue-100 border-blue-200">
+                    <p class="font-semibold">Ответ на Вопрос 1</p>
+                    <p>Здесь будет алгоритм решения проблемы для Вопроса 1...</p>
+                    <!-- Дополнительный контент, например, списки, изображения, и т.д. -->
+                </div>
+            </div>
+            <!-- Вопрос 2 -->
+            <div>
+                <button onclick="toggleAnswer('answer2')" class="text-lg text-blue-500 hover:text-blue-700">
+                    Вопрос 2
+                </button>
+                <div id="answer2" class="hidden mt-2 p-4 border rounded-lg bg-blue-100 border-blue-200">
+                    <p class="font-semibold">Ответ на Вопрос 2</p>
+                    <p>Здесь будет алгоритм решения проблемы для Вопроса 2...</p>
+                    <!-- Дополнительный контент -->
+                </div>
+            </div>
+            <!-- Повторите структуру для дополнительных вопросов -->
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    window.onload = function() {
+        // Проверяем наличие якоря в URL
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#answer')) {
+            // Показываем раздел FAQ
+            showContent('faq');
+            // Раскрываем соответствующий ответ
+            toggleAnswer(hash.substring(1));
+        }
+    };
+
+    function showContent(sectionId) {
+        var sections = document.getElementsByClassName('content-section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].style.display = 'none';
+        }
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+     function toggleAnswer(answerId) {
+        var answer = document.getElementById(answerId);
+        if (answer) {
+            answer.classList.remove('hidden');
+        }
+    }
+</script>
+{% endblock %}

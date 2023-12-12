@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная Страница{% endblock %}
+
+{% block content %}
+<!-- Герой (Hero Section) -->
+<div class="hero bg-blue-500 text-white text-center py-20">
+    <h1 class="text-5xl font-bold mb-6">Добро пожаловать в Онлайн Опросы</h1>
+    <p class="text-2xl mb-6">Исследуйте мнения, участвуйте в голосованиях, делитесь своими взглядами.</p>
+    <a href="/login" class="bg-white text-blue-500 py-2 px-4 rounded-full font-semibold">Начать сейчас</a>
+</div>
+
+<!-- Основной контент -->
+<div class="container mx-auto px-4 py-6">
+    <div class="flex flex-wrap justify-center">
+        <!-- Пример карточки -->
+        <div class="max-w-sm rounded overflow-hidden shadow-lg m-4">
+            <div class="px-6 py-4">
+                <div class="font-bold text-xl mb-2">Пример Опроса</div>
+                <p class="text-gray-700 text-base">
+                    Какое ваше любимое время года?
+                </p>
+            </div>
+            <div class="px-6 pt-4 pb-2">
+                <span class="inline-block  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 bg-orange-200">лето</span>
+                <span class="inline-block  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 bg-white">зима</span>
+            </div>
+        </div>
+        <!-- Другие карточки -->
+        <div class="max-w-sm rounded overflow-hidden shadow-lg m-4">
+            <div class="px-6 py-4">
+                <div class="font-bold text-xl mb-2">Пример Опроса</div>
+                <p class="text-gray-700 text-base">
+                    Выберите понравившийся цвет?
+                </p>
+            </div>
+            <div class="px-6 pt-4 pb-2">
+                <span class="inline-block  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 bg-red-300">красный</span>
+                <span class="inline-block  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 bg-yellow-200">желтый</span>
+                <span class="inline-block  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 bg-blue-300">синий</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Секция "О Нас" -->
+<div class="about bg-white py-12">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">О нашем проекте</h2>
+        <p class="text-center text-lg text-gray-600 mx-auto max-w-2xl">
+            Наша миссия - предоставить платформу для свободного выражения мнений и сбора данных. Мы стремимся к созданию сообщества активных участников.
+        </p>
+    </div>
+</div>
+
+<!-- Секция "Отзывы пользователей" -->
+<div class="testimonials bg-gray-100 py-12">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Отзывы Наших Пользователей</h2>
+        <div class="flex flex-wrap justify-center">
+            <!-- Карточка отзыва -->
+            <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white m-4">
+                <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">Анна Иванова</div>
+                    <p class="text-gray-700 text-base">
+                        "Пользоваться вашим сайтом было невероятно удобно и познавательно. Я узнала много нового и интересного!"
+                    </p>
+                </div>
+                <div class="px-6 pt-4 pb-2">
+                    <span class="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">#интерактивный</span>
+                    <span class="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">#познавательный</span>
+                </div>
+            </div>
+            <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white m-4">
+                <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">Анна Иванова</div>
+                    <p class="text-gray-700 text-base">
+                        "Пользоваться вашим сайтом было невероятно удобно и познавательно. Я узнала много нового и интересного!"
+                    </p>
+                </div>
+                <div class="px-6 pt-4 pb-2">
+                    <span class="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">#интерактивный</span>
+                    <span class="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">#познавательный</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Секция "Часто Задаваемые Вопросы (FAQ)" -->
+<div class="faq py-12">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Часто Задаваемые Вопросы</h2>
+        <div class="space-y-4">
+            <!-- Вопрос 1 -->
+            <div class="faq-item mt-15">
+                <a href="{% url 'faq' %}#answer1" class="text-left text-blue-500 hover:text-blue-700">
+                    Как создать новый опрос?
+                </a>
+            </div>
+
+            <!-- Вопрос 2 -->
+            <div class="faq-item">
+                <a href="{% url 'faq' %}#answer2" class="text-left text-blue-500 hover:text-blue-700">
+                    Какие типы вопросов я могу добавить?
+                </a>
+            </div>
+
+            <!-- Вопрос 3 -->
+            <div class="faq-item">
+                <a href="{% url 'faq' %}#answer3" class="text-left text-blue-500 hover:text-blue-700">
+                    Могу ли я редактировать опрос после его создания?
+                </a>
+            </div>
+
+            <!-- Вопрос 4 -->
+            <div class="faq-item">
+                <a href="{% url 'faq' %}#answer4" class="text-left text-blue-500 hover:text-blue-700">
+                    Как я могу увидеть результаты опроса?
+                </a>
+            </div>
+
+            <!-- Вопрос 5 -->
+            <div class="faq-item">
+                <a href="{% url 'faq' %}#answer5" class="text-left text-blue-500 hover:text-blue-700">
+                    Есть ли ограничение на количество опросов, которые я могу создать?
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Футер -->
+<footer class="bg-gray-800 text-white text-center py-6">
+    <p>&copy; 2023 Онлайн Опросы. Все права защищены.</p>
+    <p>Свяжитесь с нами: info@onlinepolls.com</p>
+</footer>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    function toggleFAQ(faqId) {
+        var element = document.getElementById(faqId);
+        element.classList.toggle('hidden');
+    }
+</script>
+{% endblock %}

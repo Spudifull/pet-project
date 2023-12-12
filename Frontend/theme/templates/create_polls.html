@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Создание Опроса{% endblock %}
+
+{% block content %}
+
+<div class="container mx-auto p-6">
+        <h1 class="text-2xl font-bold mb-4">Редактор Опросов</h1>
+
+        <!-- Контейнер для вопросов -->
+        <div id="questionsContainer" class="space-y-4 mb-4">
+            <!-- Вопросы будут добавляться здесь -->
+        </div>
+
+        <!-- Кнопка для добавления нового вопроса -->
+        <button onclick="addQuestionForm()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Добавить Вопрос</button>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+    function addQuestionForm() {
+            const container = document.getElementById('questionsContainer');
+
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('border', 'p-4', 'space-y-3');
+
+            // Тип вопроса
+            const selectType = document.createElement('select');
+            selectType.classList.add('border', 'p-2');
+            const option = document.createElement('option');
+            option.value = 'choice';
+            option.text = 'Выбор из списка';
+            selectType.appendChild(option);
+
+            // Загрузка медиа
+            const mediaInput = document.createElement('input');
+            mediaInput.type = 'file';
+            mediaInput.classList.add('border', 'p-2');
+
+            // Текст вопроса
+            const questionInput = document.createElement('input');
+            questionInput.type = 'text';
+            questionInput.placeholder = 'Текст вопроса';
+            questionInput.classList.add('border', 'p-2', 'w-full');
+
+            // Контейнер для вариантов ответов
+            const answersContainer = document.createElement('div');
+            answersContainer.classList.add('space-y-2');
+
+            // Функция для добавления нового варианта ответа
+            function addAnswerInput() {
+                const answerInput = document.createElement('input');
+                answerInput.type = 'text';
+                answerInput.placeholder = 'Вариант ответа';
+                answerInput.classList.add('border', 'p-2', 'w-full');
+                answersContainer.appendChild(answerInput);
+            }
+
+            // Кнопка для добавления нового варианта ответа
+            const addAnswerButton = document.createElement('button');
+            addAnswerButton.textContent = 'Добавить ответ';
+            addAnswerButton.classList.add('bg-green-500', 'text-white', 'px-2', 'py-1', 'rounded');
+            addAnswerButton.onclick = addAnswerInput;
+
+            questionDiv.appendChild(answersContainer);
+            questionDiv.appendChild(addAnswerButton);
+
+            // Кнопка удаления вопроса
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '🗑️';
+            deleteButton.classList.add('bg-red-500', 'text-white', 'px-2', 'py-1', 'rounded');
+            deleteButton.onclick = function() {
+                container.removeChild(questionDiv);
+            };
+
+            questionDiv.appendChild(selectType);
+            questionDiv.appendChild(mediaInput);
+            questionDiv.appendChild(questionInput);
+            questionDiv.appendChild(deleteButton);
+
+            container.appendChild(questionDiv);
+        }
+
+</script>
+{% endblock %}

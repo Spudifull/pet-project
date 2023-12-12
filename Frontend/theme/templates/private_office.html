@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block content %}
+
+<!-- Шапка с навигационными ссылками -->
+<div class="container mx-auto px-4 py-4 flex justify-between items-center bg-white shadow-lg rounded-lg">
+    <div class="flex space-x-4">
+        <!-- Ссылки на навигацию -->
+        <a href="{% url 'my_surveys' %}" class="text-blue-500 hover:text-blue-700">Мои опросы</a>
+        <a href="#" id="openModal" class="text-green-500 hover:text-green-700">Создать новый опрос</a>
+    </div>
+
+    <!-- Профиль пользователя -->
+    <div class="relative">
+        <img src="{% static 'images/user.jpg' %}" alt="Профиль" id="profile-menu" class="h-8 w-8 rounded-full cursor-pointer">
+        <div id="profile-dropdown" class="hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl">
+            <a href="#" id="profile-link" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Мой профиль</a>
+            <a href="{% url 'settings' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Настройки</a>
+            <!-- Дополнительные ссылки -->
+        </div>
+    </div>
+</div> <!-- Закрывающий тег для блока с классом 'container' -->
+
+<div class="container mx-auto px-4 py-8 text-center">
+    <div class="py-10">
+        <!-- Картинка ограничена до половины ширины экрана -->
+        <img src="{% static 'images/new_survey.png' %}" alt="Нет опросов" class="mx-auto mb-4 w-1/2">
+
+        <!-- Текст под картинкой -->
+        <p class="text-2xl font-semibold mb-6">У вас еще нет опросов! Самое время создать его.</p>
+        <a href="{% url 'create_survey' %}" class="px-6 py-3 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 hover:shadow-lg transition duration-300">Создать опрос</a>
+    </div>
+</div>
+
+<!-- Модальное окно для профиля пользователя -->
+<div id="profileModal" class="hidden fixed inset-0 bg-gray-700 bg-opacity-60 overflow-y-auto h-full w-full z-50 transition-opacity duration-300 ease-in-out">
+    <div class="relative top-1/4 mx-auto p-6 border w-11/12 md:w-2/3 lg:w-1/3 shadow-2xl rounded-lg bg-white flex flex-col items-center">
+        <!-- Иконка крестика для закрытия -->
+        <button onclick="closeProfileModal()" class="absolute top-0 right-0 mt-4 mr-4 p-2 rounded hover:bg-gray-200 transition duration-300 ease-in-out">
+            <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <!-- Фото профиля -->
+        <img src="{% static 'images/user.jpg' %}" alt="Профиль пользователя" class="h-24 w-24 rounded-full object-cover">
+
+        <!-- Имя пользователя -->
+        <h2 id="username" class="mt-4 text-xl font-semibold">Имя пользователя</h2>
+
+        <!-- Электронная почта -->
+        <p id="useremail" class="mt-2 text-sm text-gray-600">email@example.com</p>
+
+        <!-- Статистика -->
+        <div class="mt-4 px-4 py-2 w-full">
+            <h3 class="text-lg font-semibold">Статистика</h3>
+            <!-- Содержимое статистики -->
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно выбора темы -->
+<div id="surveyModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+    <div class="flex justify-center items-center h-full">
+        <div class="bg-white rounded-lg shadow-xl w-3/4 h-3/4">
+
+           <!-- Заголовок и кнопка закрытия -->
+            <div class="flex justify-between items-center border-b p-4">
+                <h2 class="text-2xl font-semibold">Создание опросов</h2>
+                <button onclick="closeModal()" class="rounded hover:bg-gray-200 p-2">
+                    <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Контент -->
+            <div class="flex">
+
+                <!-- Карточки с фиксированной высотой -->
+                <div class="w-full md:w-3/5 p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <div onclick="showDetails('marketAnalysis')" class="border p-3 hover:border-blue-500 cursor-pointer rounded glow-on-hover h-20 flex-none">
+                        Анализ рынка
+                    </div>
+                    <div onclick="showDetails('newTopic')" class="border p-3 hover:border-blue-500 cursor-pointer rounded glow-on-hover h-20 flex-none">
+                        Новая Тема
+                    </div>
+                    <div onclick="showDetails('newTopic')" class="border p-3 hover:border-blue-500 cursor-pointer rounded glow-on-hover h-20 flex-none">
+                        Новая Тема
+                    </div>
+                    <div onclick="showDetails('newTopic')" class="border p-3 hover:border-blue-500 cursor-pointer rounded glow-on-hover h-20 flex-none">
+                        Новая Тема
+                    </div>
+                    <div onclick="showDetails('newTopic')" class="border p-3 hover:border-blue-500 cursor-pointer rounded glow-on-hover h-20 flex-none">
+                        Новая Тема
+                    </div>
+                    <div onclick="showDetails('newTopic')" class="border p-3 hover:border-blue-500 cursor-pointer rounded glow-on-hover h-20 flex-none">
+                        Новая Тема
+                    </div>
+                </div>
+
+                <!-- Подробности -->
+                <div id="detailPanel" class="w-2/5 p-4 overflow-auto max-h-96">
+                    <p>Выберите карточку, чтобы увидеть детали</p>
+                    <!-- Содержимое и кнопка -->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    // Функции, объявленные в глобальной области видимости
+    function closeModal() {
+        document.getElementById('surveyModal').classList.add('hidden');
+        // Возвращение в личный кабинет, если это необходимо
+        // window.location.href = 'URL_личного_кабинета';
+    }
+
+    function showDetails(cardId) {
+        const details = cardDetails[cardId];
+        const detailPanel = document.getElementById('detailPanel');
+        detailPanel.innerHTML = `
+        <h3>${details.title}</h3>
+        <p>${details.description}</p>
+        <button onclick="goToEditing()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+            Начать редактирование
+        </button>`;
+    }
+
+    function closeProfileModal() {
+        let modal = document.getElementById('profileModal');
+        modal.classList.add('opacity-0');
+        setTimeout(() => { modal.classList.add('hidden'); }, 300);
+    }
+
+    function openProfileModal() {
+        let modal = document.getElementById('profileModal');
+        modal.classList.remove('hidden');
+        setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
+    }
+
+    // Данные для карточек
+    const cardDetails = {
+        'marketAnalysis': {
+            title: 'Анализ рынка',
+            description: 'Описание для Анализа рынка...'
+            // Другие данные...
+        },
+        'newTopic': {
+            title: 'Новая Тема',
+            description: 'Описание для Новой Темы...'
+            // Другие данные...
+        }
+        // Добавьте другие карточки здесь...
+    };
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // Обработчики для профиля пользователя и открытия модального окна
+        document.getElementById('profile-menu').addEventListener('click', function() {
+            var dropdown = document.getElementById('profile-dropdown');
+            dropdown.classList.toggle('hidden');
+        });
+
+        document.getElementById('profile-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openProfileModal();
+        });
+
+        document.getElementById('openModal').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('surveyModal').classList.remove('hidden');
+        });
+    });
+</script>
+{% endblock %}
