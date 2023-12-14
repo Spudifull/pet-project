@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Клонирование кода из GitHub
-                git 'https://github.com/your-username/your-repo.git'
+                git 'https://github.com/Strevochka/pet-project.git'
             }
         }
 
