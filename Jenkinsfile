@@ -28,7 +28,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 // Запускаем анализ SonarQube
-                withSonarQubeEnv('YourSonarQubeServerName') {
+                withSonarQubeEnv('pet-project-sonar') {
                     // Убедитесь, что sonar-scanner или maven sonar:sonar настроены правильно
                     sh 'sonar-scanner'
                 }
