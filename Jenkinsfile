@@ -4,34 +4,28 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Клонирование кода из GitHub
+                // Клонирование кода из GitHub репозитория
                 git 'https://github.com/Strevochka/pet-project.git'
             }
         }
 
-        stage('Build Docker Images') {
+        stage('Build') {
             steps {
-                script {
-                    // Сборка Docker-образов
-                    sh 'docker build -t myapp-backend -f Dockerfile.backend .'
-                    sh 'docker build -t myapp-frontend -f Dockerfile.frontend .'
-                }
+                // Сборка Docker образа
+                sh 'docker build -t myapp-backend .'
             }
         }
 
         stage('Test') {
             steps {
-                // Здесь добавьте команды для запуска тестов
+                // Здесь можно добавить шаги для запуска тестов
             }
         }
 
         stage('Deploy') {
             steps {
-                script {
-                    // Запуск Docker-контейнеров
-                    sh 'docker run -d -p 4000:4000 myapp-backend'
-                    sh 'docker run -d -p 3000:3000 myapp-frontend'
-                }
+                // Запуск Docker контейнера
+                sh 'docker run -d -p 4000:4000 myapp-backend'
             }
         }
     }
