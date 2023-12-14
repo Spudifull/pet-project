@@ -1,49 +1,8 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Checkout') {
-            steps {
-                // Извлекаем код из Git
-                checkout scm
-            }
-        }
-
-        stage('Build') {
-            steps {
-                // Добавьте команды для сборки проекта
-                sh 'echo Building...'
-                // Например: sh 'mvn clean package'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                // Запускаем тесты
-                sh 'echo Running tests...'
-                // Например: sh 'mvn test'
-            }
-        }
-
-        stage('Check SonarQube Scanner') {
-            steps {
-                sh 'which sonar-scanner'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Деплой на тестовый сервер
-                sh 'echo Deploying to test server...'
-                // Добавьте команды или скрипты для деплоя
-            }
-        }
+node('docker') {
+  stage('SCM') {
+    checkout poll: false, scm: [$class: 'GitSCM', branches: [[name: 'refs/heads/develop']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/CodeBabel/MEANStackApp.git']]]https://github.com/CodeBabel/MEANStackApp.git']]]
+  }
+  stage('SonarQube Analysis') {
+        sh "/home/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqubescanner/bin/sonar-scanner -Dsonar.host.url=http://127.0.0.1:9000 -Dsonar.projectName=meanstackapp -Dsonar.projectVersion=1.0 -Dsonar.projectKey=meanstack:app -Dsonar.sources=. -Dsonar.projectBaseDir=/home/jenkins/workspace/sonarqube_test_pipeline"http://127.0.0.1:9000 -Dsonar.projectName=meanstackapp -Dsonar.projectVersion=1.0 -Dsonar.projectKey=meanstack:app -Dsonar.sources=. -Dsonar.projectBaseDir=/home/jenkins/workspace/sonarqube_test_pipeline"
     }
-
-    post {
-        always {
-            // Действия после завершения пайплайна, например, отправка уведомлений
-            echo 'Pipeline execution complete!'
-        }
-    }
-}
+  }
