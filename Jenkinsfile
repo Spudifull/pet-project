@@ -2,26 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Hello') {
             steps {
-                checkout scm
+                echo 'Hello World'
             }
-        }
-
-        stage('Build & SonarQube Analysis') {
-            steps {
-                withMaven(maven: 'Maven') {
-                    sh 'mvn clean package sonar:sonar'
-                }
-            }
-        }
-
-        // Другие этапы, такие как тестирование, деплой и т.д.
-    }
-
-    post {
-        always {
-            echo 'Pipeline execution complete!'
         }
     }
 }
