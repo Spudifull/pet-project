@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        // Укажите здесь переменные окружения, если они требуются
-    }
-
     stages {
         stage('Checkout') {
             steps {
