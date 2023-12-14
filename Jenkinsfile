@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Сборка Docker образа
-                sh 'docker build -t myapp-backend .'
+                sh 'docker build -t myapp-backend -f Dockerfile.backend .'
             }
         }
 
