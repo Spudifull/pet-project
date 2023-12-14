@@ -9,17 +9,15 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Test') {
             steps {
-                // Сборка Docker образа
-                sh 'docker build -t myapp-backend -f Dockerfile.backend .'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Запуск Docker контейнера
-                sh 'docker run -d -p 4000:4000 myapp-backend'
+                script {
+                    docker.image('myapp-test-image').inside {
+                        // Запуск pylint
+                        sh 'pylint version'
+                        // Другие команды тестирования
+                    }
+                }
             }
         }
     }
