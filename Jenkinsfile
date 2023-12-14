@@ -9,5 +9,15 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                script {
+                    docker.image('myapp-test-image').inside {
+                        // Здесь ваши команды для запуска тестов
+                        sh 'pytest'
+                    }
+                }
+            }
+        }
     }
 }
