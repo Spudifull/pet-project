@@ -16,12 +16,6 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                // Здесь можно добавить шаги для запуска тестов
-            }
-        }
-
         stage('Deploy') {
             steps {
                 // Запуск Docker контейнера
