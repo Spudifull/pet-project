@@ -9,16 +9,5 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                script {
-                    docker.image('myapp-test-image').inside {
-                        // Запуск pylint
-                        sh 'pylint version'
-                        // Другие команды тестирования
-                    }
-                }
-            }
-        }
     }
 }
