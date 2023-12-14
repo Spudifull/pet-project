@@ -25,13 +25,9 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        stage('Check SonarQube Scanner') {
             steps {
-                // Запускаем анализ SonarQube
-                withSonarQubeEnv('pet-project-sonar') {
-                    // Убедитесь, что sonar-scanner или maven sonar:sonar настроены правильно
-                    sh 'sonar-scanner'
-                }
+                sh 'which sonar-scanner'
             }
         }
 
